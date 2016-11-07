@@ -32,60 +32,60 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package org.firstinspires.ftc.teamcode;
 
-
-      import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-      import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-      import com.qualcomm.robotcore.hardware.UltrasonicSensor;
-      import com.qualcomm.robotcore.hardware.DcMotor;
-      import com.qualcomm.robotcore.hardware.DcMotorController;
-      import com.qualcomm.robotcore.hardware.LegacyModule;
-      import com.qualcomm.robotcore.hardware.UltrasonicSensor;
-      import com.qualcomm.robotcore.hardware.ServoController;
-      import com.qualcomm.robotcore.util.ElapsedTime;
-
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.UltrasonicSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.LegacyModule;
+import com.qualcomm.robotcore.hardware.UltrasonicSensor;
+import com.qualcomm.robotcore.hardware.ServoController;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-      @Autonomous(name="Sensor", group="Linear Opmode")  // @Autonomous(...) is the other common choice
-public class USensorTest extends LinearOpMode {
 
-          private ElapsedTime runtime = new ElapsedTime();
-          private int USensorV = Integer.parseInt(null);
-        private DcMotor leftMotor = null;
-        private DcMotor rightMotor = null;
-        private DcMotor zipMotor = null;
-        private DcMotorController motorCtrl = null;
-        private ServoController servoCtrl = null;
-        private LegacyModule legacyMod = null;
-          private UltrasonicSensor USensor = USensorV;
-             @Override
-        public void runOpMode() throws InterruptedException {
+      @Autonomous(name="Sensor", group="Linear Opmode") 
+           public class USensorTest extends LinearOpMode {
+
+private ElapsedTime runtime = new ElapsedTime();
+private int USensorV = (0); 
+private DcMotor leftMotor = null;
+private DcMotor rightMotor = null;
+private DcMotor zipMotor = null;
+private DcMotorController motorCtrl = null;
+private ServoController servoCtrl = null;
+private LegacyModule legacyMod = null;
+private UltrasonicSensor USensor = USensorV; //value needs to be an int
+         
+      @Override
+          public void runOpMode() throws InterruptedException {
                  telemetry.addData("Status", "Initialized");
                  telemetry.update();
 
-               motorCtrl = hardwareMap.dcMotorController.get("motorcycle");
-               leftMotor = hardwareMap.dcMotor.get("left motor");
-               rightMotor = hardwareMap.dcMotor.get("right motor");
-               servoCtrl = hardwareMap.servoController.get("servo");
-               legacyMod = hardwareMap.legacyModule.get("legacy module");
-               USensor = hardwareMap.UltrasonicSensor.get("Ultrasonic Sensor");
+          motorCtrl = hardwareMap.dcMotorController.get("motorcycle");
+          leftMotor = hardwareMap.dcMotor.get("left motor");
+          rightMotor = hardwareMap.dcMotor.get("right motor");
+          servoCtrl = hardwareMap.servoController.get("servo");
+          legacyMod = hardwareMap.legacyModule.get("legacy module");
+          USensor = hardwareMap.UltrasonicSensor.get("Ultrasonic Sensor");
 
                 waitForStart();
                 runtime.reset();
 
-                while (opModeIsActive()) {
-                    -            telemetry.addData("Status", "Run Time: " + runtime.toString());
-                    -            telemetry.update();
+              while (opModeIsActive()) {
+                 telemetry.addData("Status", "Run Time: " + runtime.toString());
+                 telemetry.update();
 
-                    USensor.getUltrasonicLevel(USensorV);
-                    while(USensorV < 500); {
+                    USensor.getUltrasonicLevel(USensorV); //USensorV becomes the int value of USensor (0-255)
+                    while(USensorV < 10); {
                         USensor.getUltrasonicLevel(USensorV);
                         leftMotor.setPower(.5);
                         rightMotor.setPower(-.5);
-                    }
+                        }
                         leftMotor.setPower(-.99);
                         rightMotor.setPower(.99);
-                    +            telemetry.addData("Status", "Run Time: " + runtime.toString());
-                    +            telemetry.update();
+                 telemetry.addData("Status", "Run Time: " + runtime.toString());
+                 telemetry.update();
                         idle();
                 }
              }
